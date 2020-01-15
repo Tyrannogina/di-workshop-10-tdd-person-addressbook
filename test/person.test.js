@@ -38,9 +38,28 @@ describe('Person', () => {
 
   it('should add phones into phone list', () => {
     var person = new Person('Angelica', 'Schuyler', 'February 20, 1756');
-    person.addPhone('0687809898687');
-    person.addPhone('3897459734589');
+    person.addPhone('07712345678');
+    person.addPhone('07654321987');
 
-    expect(person.phoneNumbers).to.deep.equal(['0687809898687', '3897459734589']);
+    expect(person.phoneNumbers).to.deep.equal(['07712345678', '07654321987']);
+  })
+
+  it('should return formatted details', () => {
+    var person = new Person('Angelica', 'Schuyler', 'February 20, 1756');
+    person.addEmail('neverSatisfied@gmail.com');
+    person.addEmail('elizaFan@gmail.com');
+    person.addPhone('07712345678');
+    person.addPhone('07654321987');
+    var result = person.returnFormattedDetails();
+    var lines = result.split('\n');
+    expect(lines[0]).to.equal('Angelica Schuyler');
+    expect(lines[1]).to.equal('----------');
+    expect(lines[2]).to.equal('DOB: February 20, 1756');
+    expect(lines[4]).to.equal('Email Addresses:');
+    expect(lines[5]).to.equal('- neverSatisfied@gmail.com');
+    expect(lines[6]).to.equal('- elizaFan@gmail.com');
+    expect(lines[8]).to.equal('Phone Numbers:');
+    expect(lines[9]).to.equal('- 07712345678');
+    expect(lines[10]).to.equal('- 07654321987');
   })
 })

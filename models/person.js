@@ -54,11 +54,42 @@ class Person {
 
 
   /**
-   * printDetails - Prints the details of the person.
+   * returnFormattedDetails - Returns the formatted details in this manner:
+   * Angelica Schuyler
+   * ----------
+   * DOB: February 20, 1756
    *
-   * @return {void}
+   * Email Addresses:
+   * - neverSatisfied@gmail.com
+   * - elizaFan@gmail.com
+   *
+   * Phone Numbers:
+   * - 07712345678
+   * - 07654321987
+   *
+   * @return {string} formatted details
    */
-  printDetails() {
+  returnFormattedDetails() {
+    const lines = [
+      this.fullName(),
+      '----------',
+      `DOB: ${this.dob}`,
+      '',
+    ];
+
+    lines.push('Email Addresses:');
+    this.emails.forEach(email => {
+      lines.push(`- ${email}`);
+    })
+
+    lines.push('');
+    lines.push('Phone Numbers:');
+    this.phoneNumbers.forEach(phoneNumber => {
+      lines.push(`- ${phoneNumber}`);
+    })
+
+    return lines.join('\n')
+
 
   }
 }
