@@ -2,6 +2,7 @@ const chai = require('chai')
 const expect = chai.expect
 
 const Person = require('../models/person.js')
+const Pet = require('../models/pet.js')
 
 describe('Person', () => {
   it('should initialise properly', () => {
@@ -11,7 +12,8 @@ describe('Person', () => {
     expect(person.surname).to.equal('Hamilton');
     expect(person.dob).to.equal('August 9, 1757');
     expect(person.emails).to.deep.equal([]);
-    expect(person.phoneNumbers).to.deep.equal([])
+    expect(person.phoneNumbers).to.deep.equal([]);
+    expect(person.pets).to.deep.equal([]);
   })
 
   it('should capitalise the first name and surname', () => {
@@ -61,5 +63,20 @@ describe('Person', () => {
     expect(lines[8]).to.equal('Phone Numbers:');
     expect(lines[9]).to.equal('- 07712345678');
     expect(lines[10]).to.equal('- 07654321987');
+  })
+
+  it('should add pets to pet list', () => {
+    const person = new Person('Angelica', 'Schuyler', 'February 20, 1756');
+
+    const pet1 = new Pet('Garfield', 'cat')
+    const pet2 = new Pet('Odie', 'dog')
+    const pet3 = new Pet('Nemo', 'goldfish')
+
+    person.addPet(pet1)
+    person.addPet(pet2)
+    person.addPet(pet3)
+
+    expect(person.pets.length).to.equal(3);
+    expect(person.pets[2]).to.deep.equal({name: 'Nemo', type:'goldfish'})
   })
 })
